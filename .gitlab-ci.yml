@@ -1,6 +1,7 @@
 stages:
   - prepare-source
   - build
+  - test
   - deploy
 
 variables:
@@ -37,10 +38,14 @@ build:
       - "target/*"
       - "*/target/*"
 
+test:
+  script:
+    - mvn verify
+
 deploy:
   stage: deploy
   only:
     - tags
     - master
   script:
-    - "mvn deploy -s maven-ci-settings.xml"
+    - "mvn deploy -s maven-ci-settings.xml -DskipTests"
