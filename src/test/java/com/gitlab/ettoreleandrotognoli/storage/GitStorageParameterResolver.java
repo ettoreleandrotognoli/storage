@@ -1,7 +1,7 @@
 package com.gitlab.ettoreleandrotognoli.storage;
 
-import com.gitlab.ettoreleandrotognoli.storage.core.git.GitStorage;
 import com.gitlab.ettoreleandrotognoli.storage.core.LocalStorage;
+import com.gitlab.ettoreleandrotognoli.storage.core.git.GitStorage;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
@@ -18,7 +18,7 @@ public class GitStorageParameterResolver implements ParameterResolver {
     }
 
     @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public GitStorage resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
         try {
             File file = Files.createTempDirectory("").toFile();
             file.mkdirs();

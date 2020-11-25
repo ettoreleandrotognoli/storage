@@ -15,6 +15,7 @@
         <jackson.version>2.11.0</jackson.version>
         <junit.version>5.5.2</junit.version>
         <assertj.version>3.18.1</assertj.version>
+        <javafaker.version>1.0.2</javafaker.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.0</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
@@ -36,6 +37,12 @@
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
             <version>${jgit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

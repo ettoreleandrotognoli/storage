@@ -17,7 +17,7 @@ public class FileParameterResolver implements ParameterResolver {
     }
 
     @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public File resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
         try {
             return Files.createTempDirectory("").toFile();
         } catch (IOException exception) {

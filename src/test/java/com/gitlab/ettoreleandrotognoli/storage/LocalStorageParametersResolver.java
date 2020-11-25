@@ -17,7 +17,7 @@ public class LocalStorageParametersResolver implements ParameterResolver {
     }
 
     @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+    public LocalStorage resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
         try {
             return new LocalStorage(Files.createTempDirectory("").toFile(), TestUtils.OBJECT_MAPPER);
         } catch (IOException exception) {
