@@ -25,7 +25,7 @@ public class LocalRepository<E> extends AbstractLocalRepository<E> implements Re
 
 
     @Override
-    public Stream<E> listAll() throws Exception {
+    public Stream<E> streamAll() throws Exception {
         Iterable<E> iterable = () -> {
             try {
                 return objectReader.readValues(dataFile);

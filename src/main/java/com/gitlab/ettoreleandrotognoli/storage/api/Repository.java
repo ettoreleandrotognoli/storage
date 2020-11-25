@@ -4,6 +4,6 @@ import java.util.stream.Stream;
 
 public interface Repository<E> {
 
-    Stream<E> listAll() throws Exception;
+    Stream<E> streamAll() throws Exception;
 
 }

@@ -32,7 +32,7 @@ public class MutableLocalRepository<E> extends LocalRepository<E> implements Mut
                 throw new Exception(String.format("Multiple objects with same pk (%s) : %s", entry.getKey(), entry.getValue()));
             }
         }
-        Map<Object, List<E>> oldDataGroupedByPk = listAll()
+        Map<Object, List<E>> oldDataGroupedByPk = streamAll()
                 .collect(Collectors.groupingBy(extractPk));
 
         newDataGroupedByPk.entrySet()
@@ -64,7 +64,7 @@ public class MutableLocalRepository<E> extends LocalRepository<E> implements Mut
 
     @Override
     public MutableRepository<E> remove(Predicate<E> predicate) throws Exception {
-        Stream<E> keepIt = listAll()
+        Stream<E> keepIt = streamAll()
                 .filter(predicate.negate());
         writeData(keepIt);
         return this;

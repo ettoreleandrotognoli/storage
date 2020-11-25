@@ -15,7 +15,7 @@ public class LocalRepositoryTest {
 
     @Test
     public void readEmpty(LocalStorage storage) throws Exception {
-        int size = storage.repositoryFor(Person.class).listAll().collect(Collectors.toList()).size();
+        int size = storage.repositoryFor(Person.class).streamAll().collect(Collectors.toList()).size();
         Assertions.assertThat(size).isZero();
     }
 
@@ -27,7 +27,7 @@ public class LocalRepositoryTest {
     @Test
     public void readWithOne(LocalStorage storage) throws Exception {
         storage.mutableRepositoryFor(Person.class).store(Stream.of(new Person()));
-        int size = storage.repositoryFor(Person.class).listAll().collect(Collectors.toList()).size();
+        int size = storage.repositoryFor(Person.class).streamAll().collect(Collectors.toList()).size();
         Assertions.assertThat(size).isEqualTo(1);
     }
 
