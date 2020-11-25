@@ -41,16 +41,9 @@ build:
       - "target/*"
       - "*/target/*"
 
-snapshot-deploy:
+deploy:
   stage: deploy
   only:
     - master
   script:
-    - mvn deploy -DaltDeploymentRepository=${MAVEN_SNAPSHOT_REPO}
-
-release-deploy:
-  stage: deploy
-  only:
-    - tags
-  script:
-    - mvn deploy -DaltDeploymentRepository=${MAVEN_RELEASE_REPO}
+    - mvn deploy
