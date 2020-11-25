@@ -3,7 +3,7 @@ package com.gitlab.ettoreleandrotognoli.storage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class TestUtils {
 
     static {
         OBJECT_MAPPER = new ObjectMapper(new YAMLFactory());
-        OBJECT_MAPPER.registerModule(new JSR310Module());
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
         OBJECT_MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         OBJECT_MAPPER.findAndRegisterModules();
         PERSON_FILE = new File(TestUtils.class.getClassLoader().getResource("person.yml").getFile());
