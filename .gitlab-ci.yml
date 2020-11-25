@@ -7,8 +7,8 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository "
 
 before_script:
-  - mkdir -p ~/.m2/
-  - cp $MAVEN_SETTINGS ~/.m2/settings.xml
+  - mkdir -p ${CI_PROJECT_DIR}/.m2/
+  - cp $MAVEN_SETTINGS ${$CI_PROJECT_DIR}/.m2/settings.xml
 
 image: maven
 cache: &global_cache
