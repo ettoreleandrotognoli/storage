@@ -26,7 +26,7 @@ public class StorageFactoryImpl implements StorageFactory {
         this.objectMapper = objectMapper;
     }
 
-    protected StorageFactoryImpl() {
+    private StorageFactoryImpl() {
         objectMapper = new ObjectMapper(new YAMLFactory());
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);

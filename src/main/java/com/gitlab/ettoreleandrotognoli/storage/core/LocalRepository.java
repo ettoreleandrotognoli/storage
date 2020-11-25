@@ -11,7 +11,6 @@ import java.util.stream.StreamSupport;
 
 public class LocalRepository<E> extends AbstractLocalRepository<E> implements Repository<E> {
 
-
     protected ObjectReader objectReader;
     protected File dataFile;
     protected Function<E, Object> extractPk;
