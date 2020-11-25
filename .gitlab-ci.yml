@@ -6,10 +6,6 @@ stages:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository "
 
-before_script:
-  - mkdir -p ${CI_PROJECT_DIR}/.m2/
-  - cp $MAVEN_SETTINGS ${$CI_PROJECT_DIR}/.m2/settings.xml
-
 image: maven
 cache: &global_cache
   key: maven
@@ -46,4 +42,4 @@ deploy:
   only:
     - master
   script:
-    - mvn deploy
+    - "mvn deploy -s maven-ci-settings.xml"
