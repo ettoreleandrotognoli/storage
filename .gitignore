@@ -4,4 +4,4 @@
 target
 
 !.gitignore
-
+!.gitlab-ci.yml

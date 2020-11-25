@@ -1,0 +1,56 @@
+stages:
+  - prepare-source
+  - build
+  - deploy
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository "
+
+before_script:
+  - mkdir -p ~/.m2/
+  - cp $MAVEN_SETTINGS ~/.m2/settings.xml
+
+image: maven
+cache: &global_cache
+  key: maven
+  paths:
+    - .m2/repository
+  policy: pull
+
+
+set-version:
+  stage: prepare-source
+  script:
+    - mvn versions:set -DnewVersion=${CI_COMMIT_REF_NAME} -DgenerateBackupPoms=false
+  only:
+    - tags
+  artifacts:
+    paths:
+      - "pom.xml"
+      - "*/pom.xml"
+
+build:
+  stage: build
+  cache:
+    <<: *global_cache
+    policy: pull-push
+  script:
+    - mvn clean install -DskipTests
+  artifacts:
+    paths:
+      - "target/*"
+      - "*/target/*"
+
+snapshot-deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - mvn deploy -DaltDeploymentRepository=${MAVEN_SNAPSHOT_REPO}
+
+release-deploy:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - mvn deploy -DaltDeploymentRepository=${MAVEN_RELEASE_REPO}
