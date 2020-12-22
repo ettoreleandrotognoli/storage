@@ -3,6 +3,7 @@ package com.gitlab.ettoreleandrotognoli.storage.core;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gitlab.ettoreleandrotognoli.storage.api.MutableStorage;
 
+import javax.persistence.Entity;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -20,7 +21,8 @@ public class LocalStorage implements MutableStorage {
     static final PathStrategy DEFAULT_PATH_STRATEGY = new PathStrategy() {
         @Override
         public File resolvePath(File basePath, Class<?> dataType) throws IOException {
-            String pathName = dataType.getCanonicalName();
+            Entity entity = dataType.getAnnotation(Entity.class);
+            String pathName = entity != null ? entity.name() : dataType.getSimpleName();
             File repositoryPath = new File(basePath, pathName);
             repositoryPath.mkdirs();
             File dataFile = new File(repositoryPath, "data.yml");
