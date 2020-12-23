@@ -7,14 +7,14 @@ import com.gitlab.ettoreleandrotognoli.storage.core.AbstractLocalRepository;
 import com.gitlab.ettoreleandrotognoli.storage.core.MutableLocalRepository;
 import com.gitlab.ettoreleandrotognoli.storage.core.git.GitStorage;
 import org.eclipse.jgit.api.AddCommand;
+import org.eclipse.jgit.lib.Constants;
 
-public class AlwaysAdd implements MutableStorageSession, AbstractLocalRepository.Listener<Object> {
+public class AddAndCommit implements MutableStorageSession, AbstractLocalRepository.Listener<Object> {
 
-    private final GitStorage gitStorage;
-    private final String message;
-    private String result;
+    protected final GitStorage gitStorage;
+    protected final String message;
 
-    public AlwaysAdd(GitStorage gitStorage, String message) {
+    public AddAndCommit(GitStorage gitStorage, String message) {
         this.gitStorage = gitStorage;
         this.message = message;
     }
@@ -34,7 +34,7 @@ public class AlwaysAdd implements MutableStorageSession, AbstractLocalRepository
     @Override
     public void close() throws Exception {
         try {
-            result = commit();
+            commit();
         } catch (Exception exception) {
             rollback();
             throw exception;
@@ -50,7 +50,7 @@ public class AlwaysAdd implements MutableStorageSession, AbstractLocalRepository
     }
 
     public void rollback() throws Exception {
-        gitStorage.getGit().checkout().call();
+        gitStorage.getGit().checkout().addPath(".").call();
     }
 
     @Override

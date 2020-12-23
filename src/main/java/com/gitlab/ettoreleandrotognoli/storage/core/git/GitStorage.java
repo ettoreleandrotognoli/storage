@@ -4,7 +4,7 @@ import com.gitlab.ettoreleandrotognoli.storage.api.MutableStorageSession;
 import com.gitlab.ettoreleandrotognoli.storage.api.Repository;
 import com.gitlab.ettoreleandrotognoli.storage.api.SessionSupportStorage;
 import com.gitlab.ettoreleandrotognoli.storage.core.LocalStorage;
-import com.gitlab.ettoreleandrotognoli.storage.core.git.strategies.AlwaysAdd;
+import com.gitlab.ettoreleandrotognoli.storage.core.git.strategies.AddAndCommit;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Constants;
 
@@ -18,7 +18,7 @@ public class GitStorage implements SessionSupportStorage {
 
 
     public GitStorage(LocalStorage localStorage) throws Exception {
-        this(localStorage, AlwaysAdd::new);
+        this(localStorage, AddAndCommit::new);
     }
 
     public GitStorage(LocalStorage localStorage, GitSessionStrategy sessionStrategy) throws Exception {
@@ -38,6 +38,7 @@ public class GitStorage implements SessionSupportStorage {
         return openSession("");
     }
 
+    @Override
     public MutableStorageSession openSession(String message) {
         return sessionStrategy.openSession(this, message);
     }

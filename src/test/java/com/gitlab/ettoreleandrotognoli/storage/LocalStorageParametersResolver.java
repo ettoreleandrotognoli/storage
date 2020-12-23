@@ -1,5 +1,6 @@
 package com.gitlab.ettoreleandrotognoli.storage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gitlab.ettoreleandrotognoli.storage.core.LocalStorage;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;

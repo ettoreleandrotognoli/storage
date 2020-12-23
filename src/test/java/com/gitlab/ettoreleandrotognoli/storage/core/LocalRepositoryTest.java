@@ -1,6 +1,7 @@
 package com.gitlab.ettoreleandrotognoli.storage.core;
 
 import com.gitlab.ettoreleandrotognoli.storage.LocalStorageParametersResolver;
+import com.gitlab.ettoreleandrotognoli.storage.ObjectMapperParameterResolver;
 import com.gitlab.ettoreleandrotognoli.storage.data.Person;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@ExtendWith(LocalStorageParametersResolver.class)
+@ExtendWith({LocalStorageParametersResolver.class})
 public class LocalRepositoryTest {
 
     @Test
